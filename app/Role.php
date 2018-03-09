@@ -8,7 +8,7 @@ class Role extends EntrustRole{
 	use SoftDeletes;
 	protected $fillable = [
 		'name',
-		'display_name',
+		'code',
 		'description',
 	];
     public function users(){
