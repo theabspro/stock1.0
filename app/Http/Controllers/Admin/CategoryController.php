@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,10 +16,15 @@ use Illuminate\Validation\Rule;
 class CategoryController extends Controller
 {
     public function __construct(){
-    	$this->data['theme'] = 'pooled_front/';
+    	$this->data['theme'] = 'pooled/';
     }
 
     public function list(){
+    	if(Auth::user()->hasRole('super-admin')){
+    		$this->data['categories'] = Category::where('company_id')->with('parent')->get();
+    	}else{
+    		$this->data['categories'] = Category::where('company_id',Auth::user()->company_id)->get();
+    	}
         return view($this->data['theme'].'categories/list', $this->data);
     }
 

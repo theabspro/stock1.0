@@ -17,6 +17,14 @@ Route::get('/logout',function(){
     return redirect('/login');
 })->name('logout');
 
+Route::get('/{page?}', 'PageController@page')->name('page');
+Route::get('/category/{category}', 'PageController@category')->name('category');
+Route::get('/product/{product}', 'PageController@product')->name('product');
+Route::post('/search', 'PageController@search')->name('search');
+Route::post('/add-to-cart', 'PageController@addToCart')->name('addToCart');
+
+
+Route::prefix('admin')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
 	
 	//*******************//
@@ -24,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//*******************//
 	
 	//DASHBOARD
-	Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+	Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 	
 	//ROLES
 	Route::get('/masters/roles/list', 'Masters\RolesController@list')->name('listRoles');
@@ -41,11 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/masters/users/save', 'Masters\UsersController@save')->name('saveUser');
 
 	//CATEGORY
-	Route::get('/categories/list', 'CategoryController@list')->name('listCategories');
-	Route::get('/categories/add', 'CategoryController@add')->name('addCategory');
-	Route::get('/categories/edit/{category}', 'CategoryController@edit')->name('editCategory');
-	Route::get('/categories/delete/{id}', 'CategoryController@delete')->name('deleteCategory');
-	Route::post('/categories/save', 'CategoryController@save')->name('saveCategory');
+	Route::get('/categories/list', 'Admin\CategoryController@list')->name('listCategories');
+	Route::get('/categories/add', 'Admin\CategoryController@add')->name('addCategory');
+	Route::get('/categories/edit/{category}', 'Admin\CategoryController@edit')->name('editCategory');
+	Route::get('/categories/delete/{id}', 'Admin\CategoryController@delete')->name('deleteCategory');
+	Route::post('/categories/save', 'Admin\CategoryController@save')->name('saveCategory');
 
 	//BRANDS
 	Route::get('/brands/list', 'BrandController@list')->name('listBrands');
@@ -86,5 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/get-product-stocks/{product}', 'GeneralController@getProductStocks')->name('getProductStocks');
 
 
+});
 });
 

@@ -36,7 +36,7 @@ class BrandController extends Controller
     }
 
     public function edit($brand){
-        $this->data['brand'] = Brand::findOrFail($category);
+        $this->data['brand'] = Brand::findOrFail($brand);
         $this->data['company_list'] = Company::pluck('name','id');
     	$this->data['action'] = 'Edit';
         return view($this->data['theme'].'brands/form', $this->data);
