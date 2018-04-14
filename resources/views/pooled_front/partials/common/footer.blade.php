@@ -17,7 +17,7 @@
 				<ul>
 					@foreach($brands as $brand)
 					<li>
-						<a href="#">{{$brand->name}}</a>
+						<a href="{{route('brand_products', ['brand' => $brand->id])}}">{{$brand->name}}</a>
 					</li>
 					@endforeach
 				</ul>
@@ -93,10 +93,6 @@
 
 </div>
 </div>
-        
-
-        
-        
 
     </div>
 
@@ -119,25 +115,6 @@
 	<!-- price range (top products) -->
 	<script src="{{ asset($theme.'js/jquery-ui.js')}}"></script>
 
-	<!-- password-script -->
-	<script>
-		window.onload = function () {
-			document.getElementById("password1").onchange = validatePassword;
-			document.getElementById("password2").onchange = validatePassword;
-		}
-
-		function validatePassword() {
-			var pass2 = document.getElementById("password2").value;
-			var pass1 = document.getElementById("password1").value;
-			if (pass1 != pass2)
-				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-			else
-				document.getElementById("password2").setCustomValidity('');
-			//empty string means no validation error
-		}
-	</script>
-	<!-- //password-script -->
-
 	<!-- smoothscroll -->
 	<script src="{{ asset($theme.'js/SmoothScroll.min.js')}}"></script>
 	<!-- //smoothscroll -->
@@ -145,6 +122,11 @@
 	<!-- start-smooth-scrolling -->
 	<script src="{{ asset($theme.'js/move-top.js')}}"></script>
 	<script src="{{ asset($theme.'js/easing.js')}}"></script>
+
+    <script src="{{ asset($theme.'plugins/jquery-validation/dist/jquery.validate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset($theme.'plugins/jquery-validation/dist/additional-methods.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset($theme.'plugins/noty/js/noty.min.js') }}" type="text/javascript"></script>
+
 	<script>
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -154,6 +136,11 @@
 					scrollTop: $(this.hash).offset().top
 				}, 1000);
 			});
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
 		});
 	</script>
 	<!-- //end-smooth-scrolling -->
@@ -175,9 +162,9 @@
 
 	<!-- for bootstrap working -->
 	<script src="{{ asset($theme.'js/bootstrap.js')}}"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="{{ asset($theme.'js/cbpHorizontalMenu.min.js')}}"></script>
-		<script>
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="{{ asset($theme.'js/cbpHorizontalMenu.js')}}"></script>
+	<script>
 			$(function() {
 				cbpHorizontalMenu.init();
 			});
@@ -185,6 +172,16 @@
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
 
+	<!-- cart-js -->
+	<script>
+		$(document).ready(function(){
+			$('.buy-btn').click(function(){
+				$('#buy_modal #product_id').val($(this).data('id'));
+				$('#buy_modal #cart_product_name').html($(this).data('name'));
+			});
+		});
+	</script>
+	<!-- //cart-js -->
 
 </body>
 

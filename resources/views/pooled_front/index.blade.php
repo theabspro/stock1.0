@@ -94,31 +94,35 @@
 					<!-- first section (nuts) -->
 					<div class="product-sec1">
 						<h3 class="heading-tittle">Rotary Drills</h3>
+
+						@foreach($featured_products as $featured_product)
 						<div class="col-md-4 product-men">
 							<div class="men-pro-item simpleCart_shelfItem">
 								<div class="men-thumb-item">
-									<div class="card-figure"><img src="{{$theme}}images/m1.jpg" alt=""></div>
+									<div class="card-figure">
+										<img src="{{ asset(productImage($featured_product->image1,$featured_product->id)) }}" alt="{{$featured_product->name}}" class="img-responsive">
+									</div>
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
+											<a href="{{route('product', ['product' => $featured_product->id])}}" class="link-product-add-cart">
+												Quick View
+											</a>
 										</div>
 									</div>
+									@if($featured_product->is_new == 'YES')
 									<span class="product-new-top">New</span>
+									@endif
 								</div>
 								<div class="item-info-product ">
 									<h4>
-										<a href="single.html">Bosch GBM 10 RE</a>
+										<a href="{{route('product', ['product' => $featured_product->id])}}">
+											{{$featured_product->name}}
+										</a>
 									</h4>
-                                   
-									<!--<div class="info-product-price">
-										<span class="item_price">$149.00</span>
-										<del>$280.00</del>
-									</div>-->
 									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 										<form action="#" method="post">
 											<fieldset>
-												
-												<input type="submit" name="submit" value="Add to cart" class="button" />
+												<input type="button" data-id="{{$featured_product->id}}" data-name="{{$featured_product->name}}" value="Buy" class="button buy-btn" data-toggle="modal" data-target="#buy_modal" />												
 											</fieldset>
 										</form>
 									</div>
@@ -126,75 +130,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 product-men">
-							<div class="men-pro-item simpleCart_shelfItem">
-								<div class="men-thumb-item">
-									<div class="card-figure"><img src="{{$theme}}images/m2.jpg" alt=""></div>
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-
-								</div>
-								<div class="item-info-product ">
-									<h4>
-										<a href="single.html">
-
-Bosch GBM 13 RE</a>
-									</h4>
-									<!--<div class="info-product-price">
-										<span class="item_price">$200.00</span>
-										<del>$420.00</del>
-									</div>-->
-                                 
-									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-										<form action="#" method="post">
-											<fieldset>
-												
-												<input type="submit" name="submit" value="Add to cart" class="button" />
-											</fieldset>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-men">
-							<div class="men-pro-item simpleCart_shelfItem">
-								<div class="men-thumb-item">
-									<div class="card-figure"><img src="{{$theme}}images/m3.jpg" alt=""></div>
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-
-								</div>
-								<div class="item-info-product ">
-									<h4>
-										<a href="single.html">Bosch GBM 13-2 RE</a>
-									</h4>
-                                 
-									<!--<div class="info-product-price">
-										<span class="item_price">$520.99</span>
-										<del>$600.99</del>
-									</div>-->
-									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-										<form action="#" method="post">
-											<fieldset>
-												
-												<input type="submit" name="submit" value="Add to cart" class="button" />
-											</fieldset>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-                       
+						@endforeach
 						<div class="clearfix"></div>
                        
 					</div>

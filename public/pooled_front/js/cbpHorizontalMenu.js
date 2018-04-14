@@ -17,10 +17,17 @@ var cbpHorizontalMenu = (function() {
 
 	function init() {
 		$menuItems.on( 'click', open );
-		$listItems.on( 'click', function( event ) { event.stopPropagation(); } );
+		//$listItems.on( 'click', function( event ) {  } );
 	}
 
 	function open( event ) {
+
+		event.preventDefault();
+		var target = $(this).data('href');
+		if(target !== ''){
+			window.location = target;
+			return;
+		}
 
 		if( current !== -1 ) {
 			$listItems.eq( current ).removeClass( 'cbp-hropen' );

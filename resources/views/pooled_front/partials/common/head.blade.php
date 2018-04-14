@@ -28,7 +28,9 @@
 <!-- fonts -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="{{ asset($theme.'css/default.css')}}" />
+<!--link rel="stylesheet" type="text/css" href="{{ asset($theme.'css/default.css')}}" /-->
 <link rel="stylesheet" type="text/css" href="{{ asset($theme.'css/component.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ asset($theme.'plugins/noty/css/noty.css') }}">
+
 <script src="{{ asset($theme.'js/modernizr.custom.js')}}"></script>
 

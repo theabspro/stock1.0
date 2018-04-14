@@ -31,6 +31,7 @@
 	color: #fff;
 	display: inline-block;
 	padding-left:18px;
+	font-size:14px;
 }
 
 .cbp-hrmenu > ul > li > a:hover {
@@ -90,7 +91,25 @@ height: 38px;
 padding-top: 7px;
 margin-top:10px;
 }
-
+/*Custom by abdul*/
+.cbp-hrsub-inner h4 a{ 	color: #fff !important; }
+.footer-grids h4{ color: #fff; }
+.bgf {
+    color: #fff;
+    background-color: #000;
+    margin-bottom: 3px;
+    padding-left: 8px;
+    font-size: 95%;
+    font-weight: 299px;
+    width: 195px;
+    height: 38px;
+    padding-top: 7px;
+    margin-top: 10px;
+}
+.left-side a{ color: #000; font-size: 14px; }
+.minicartk-subtotal, .minicartk-details-price, .minicartk-attributes{ display: none; }
+#PPminicartk .minicartk-details-name{ width: 77% !important; }
+#PPminicartk .minicartk-footer{ text-align: center; }
 /* Examples for media queries */
 
 @media screen and (max-width: 52.75em) { 

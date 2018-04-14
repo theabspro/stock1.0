@@ -9,11 +9,13 @@ use App\Category;
 use App\Product;
 use App\Company;
 use App\Brand;
+use App\ProductFeature;
 use Auth;
 use DB;
 use Validator;
 use Illuminate\Validation\Rule;
-
+use Image;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -69,15 +71,6 @@ class ProductController extends Controller
                     'required',
                     'max:191'
                 ],
-/*
-                'sku' => [
-                    'required',
-                    'max:191'
-                ],
-                'price' => [
-                    'required',
-                ],
-*/	        
             ]);
 
 
@@ -96,6 +89,31 @@ class ProductController extends Controller
 	        $product->fill($request->all());
 	        $product->save();
 
+            $image = 'image1';
+            for($i=1;$i<=3;$i++){
+                $image = 'image'.$i;
+                if($request->hasFile($image)) {
+                    $res = Storage::disk('app')->makeDirectory('products/'.$product->id);
+                    $extension = $request->file($image)->getClientOriginalExtension();
+                    Image::make($request->file($image))->resize(166, NULL, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save('app/products/'.$product->id.'/'.$i.'.'.$extension);
+                    $product->$image = $i.'.'.$extension;
+                    $product->save();
+
+                }
+            }
+
+            //DELETING EXISTING FEATURES
+            ProductFeature::where('product_id',$product->id)->delete();
+            if($request->features){
+                foreach($request->features as $feature){
+                    $product_feature = new ProductFeature;
+                    $product_feature->product_id = $product->id;
+                    $product_feature->feature = $feature;
+                    $product_feature->save();
+                }
+            }
 			DB::commit();
 
 			$request->session()->flash('success', 'Product saved successfully!');

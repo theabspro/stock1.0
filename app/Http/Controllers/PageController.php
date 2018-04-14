@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Brand;
 use App\Product;
+use App\ContactRequest;
+use App\EmailSubscription;
+use Validator;
+
 class PageController extends Controller{
 
 	public function __construct(){
@@ -15,14 +19,29 @@ class PageController extends Controller{
 	}	
 
     public function page($page='index'){
+        if($page=='index'){
+            $this->data['featured_products'] = Product::where('is_featured','YES')->get();
+        }
         return view($this->data['theme'].$page,$this->data);
     }
 
     public function category(Category $category){
-    	$this->data['category'] = $category;
-    	$this->data['products'] = $category->all_products();
-    	$this->data['all_brands'] = Brand::pluck('name');
+        $this->data['category'] = $category;
+        $this->data['products'] = $category->all_products();
+        $this->data['all_brands'] = Brand::pluck('name');
         return view($this->data['theme'].'category', $this->data);
+    }
+
+    public function brands(){
+        $this->data['brands'] = Brand::get();
+        return view($this->data['theme'].'brands2', $this->data);
+    }
+
+    public function brand_products(Brand $brand){
+        $this->data['brand'] = $brand;
+        $this->data['products'] = $brand->products;
+        //dd($this->data['products']);
+        return view($this->data['theme'].'brand_products', $this->data);
     }
 
     public function product(Product $product){
@@ -37,6 +56,49 @@ class PageController extends Controller{
         return view($this->data['theme'].'search', $this->data);
     }
 
+    public function save_contact_form(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                'required',
+            ],
+            'subject' => [
+                'required',
+            ],
+            'email' => [
+                'required',
+                'email',
+            ],
+            'message' => [
+                'required',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['errors'=>$validator->errors()->all()]);
+        }
+        $contact_request =new ContactRequest($request->all());
+        $contact_request->save();
+        return redirect()->back()->with(['success' => 'Cotact Request Sent Successfully']);
+    }
+
+    public function save_email_subscription(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => [
+                'required',
+                'email',
+                'unique:email_subscriptions',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['errors'=>$validator->errors()->all()]);
+        }
+        $email_subscription =new EmailSubscription($request->all());
+        $email_subscription->save();
+        return redirect()->back()->with(['success' => 'Email Subscription Registered Successfully']);
+    }
 
 
 }

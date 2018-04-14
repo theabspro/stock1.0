@@ -21,7 +21,7 @@
 	<!-- top Products -->
 	<div class="ads-grid">
 		<div class="container">
-			<h3 class="tittle-w3l">Our Top Products
+			<h3 class="tittle-w3l">{{$category->name}}
 				<span class="heading-style">
 					<i></i>
 					<i></i>
@@ -49,7 +49,7 @@
 					<ul>
 						@foreach($all_brands as $brand)
 						<li>
-							<input type="checkbox" class="checked filter_by_brands" value="{{$brand}}" autocomplete="off">
+							<input type="checkbox" class="checked filter_by_brands" value="{{$brand}}" autocomplete="off" checked="checked">
 							<span class="span">{{$brand}}</span>
 						</li>
 						@endforeach
@@ -61,14 +61,13 @@
 				<div class="wrapper">
 					<!-- first section (nuts) -->
 				  	<div class="product-sec1">
-						<h3 class="heading-tittle">{{$category->name}}</h3>
 
 						@foreach($products as $product)
 						<div class="col-md-4 product_item {{$product->brand->name}}">
 							<div class="men-pro-item simpleCart_shelfItem">
 								<div class="men-thumb-item">
 									<div class="card-figure">
-										<img src="images/m1.jpg" alt="">
+										<img src="{{ asset(productImage($product->image1,$product->id)) }}" alt="{{$product->name}}" class="img-responsive">
 									</div>
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
@@ -77,19 +76,20 @@
 											</a>
 										</div>
 									</div>
+									@if($product->is_new == 'YES')
 									<span class="product-new-top">New</span>
+									@endif
+
 								</div>
 								<div class="item-info-product ">
 									<h4>
-										<a href="single.html">{{$product->name}}</a>
+										<a href="{{route('product', ['product' => $product->id])}}">{{$product->name}}</a>
 									</h4>
 									
 									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-										<form action="#" method="post">
 											<fieldset>
-												<input type="submit" name="submit" value="Add to cart" class="button" />
+												<input type="button" data-id="{{$product->id}}" data-name="{{$product->name}}" value="Buy" class="button buy-btn" data-toggle="modal" data-target="#buy_modal" />
 											</fieldset>
-										</form>
 									</div>
 								</div>
 							</div>

@@ -62,7 +62,7 @@ label{
 .header ul li {
     display: inline-block;
 
-    width: 19%;
+    width: 24%;
     text-align: center;
     color: #000;
     font-size: 13px;
@@ -105,7 +105,7 @@ label{
 .agileits_search {
     margin-top: 16px;
     float: left;
-    width: 80%;
+    width: 99%;
 }
 .agileits_search input[type="search"]{
     outline: none;
@@ -581,6 +581,7 @@ button.w3view-cart {
 }
 #PPminicartk {
     left: 44% !important;
+    z-index: 9;
 }
 .minicartk-showing #PPminicartk form{
     overflow-x: hidden;
@@ -588,7 +589,7 @@ button.w3view-cart {
 }
 #PPminicartk .minicartk-footer {
     position: relative;
-	width: 80%;
+
 }
 .product-men {
     margin-top: 2em;
@@ -2283,10 +2284,10 @@ img.zoom-img:hover{
     letter-spacing: 0.5px;
 }
 .product-single-w3l ul li {
-    list-style: inside;
     font-size: 14px;
     margin-bottom: 5px;
     line-height: 1.7;
+    margin-left: 10px;
 }
 .occasion-cart .snipcart-details {
     width: 38%;
@@ -4891,3 +4892,28 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 /*--//responsive--*/
+.pdp-specs__specification-value {
+    text-align: right;
+}
+.pdp-specs__specification>* {
+    display: inline-block;
+    width: calc(50% - 3px);
+    vertical-align: top;
+}
+.pdp-specs__specification-name {
+    font-weight: 700;
+}
+.pdp-specs__specification:nth-child(1n+1), 
+.pdp-specs__specification:nth-child(1n+2) {
+    background-color: #e5e5e5;
+	width:350px;
+}
+specs__specification {
+    display: inline-block;
+    width: calc(50% - 20px);
+    vertical-align: centre;
+}
+.pdp-specs__specification {
+    padding: 8px 10px;
+    text-transform: uppercase;
+}

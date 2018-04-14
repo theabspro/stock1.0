@@ -7,15 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-    	'name',
-    	'company_id',
-    	'category_id',
-    	'brand_id',
-    	'hsn_code',
+        'category_id',
+        'brand_id',
+        'company_id',
+        'name',
+        'hsn_code',
+        'specifications',
+        'advantages',
+        'features',
+        'rating',
+        'is_new',
+        'is_featured',
     ];
 
     public function company(){
-    	return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\Company');
     }
 
     public function category(){
@@ -28,6 +34,10 @@ class Product extends Model
 
     public function stocks(){
         return $this->hasMany('App\Stock');
+    }
+
+    public function features(){
+        return $this->hasMany('App\ProductFeature');
     }
 
 }

@@ -1,4 +1,16 @@
 $(document).ready(function(){
+
+    if(add_new_feature){
+        add_feature();
+    }
+
+    $('#add-feature').click(add_feature);
+
+    function add_feature(){
+        var html = $('#dummy_feature').html()
+        $('#features_wrp #feature_inner').append(html);
+    }
+
     var form_id = '#form';
     var v = jQuery(form_id).validate({
       ignore: "",

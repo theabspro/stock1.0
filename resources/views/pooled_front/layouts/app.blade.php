@@ -37,6 +37,14 @@
                       text: '<?php echo Session::get('error') ?>'
                     }).show();
                 @endif    
+          
+                @if(Session::has('errors'))
+                    new Noty({
+                      type: 'error',
+                      layout: 'topRight',
+                      text: '<?php echo implode(', ',Session::get('errors')) ?>'
+                    }).show();
+                @endif    
 
             })
         </script>

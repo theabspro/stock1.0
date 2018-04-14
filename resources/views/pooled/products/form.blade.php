@@ -51,36 +51,61 @@
                     <label>HSN Code</label>
                     {{Form::text('hsn_code', $product->hsn_code,['class' => 'form-control', 'autocomplete' => 'off' ])}}
                 </div>
-                <!--div class="form-group col-sm-6">
-                    <label>SKU</label>
-                    {{Form::text('sku', $product->sku,['class' => 'form-control', 'autocomplete' => 'off' ])}}
-                </div-->
             </div>
 
+            <div id="features_wrp">
+                <h4>Features</h4>
+                <div id="feature_inner">
+                    @foreach($product->features as $feature)
+                        <?php $value = $feature->feature ?>
+                        @include($theme.'partials.product.feature')
+                    @endforeach
+                </div>
+                <a href="javascript:;" id="add-feature">ADD</a>
+            </div><!-- features_wrp -->
+
+
             <div class="row">
-                <!--div class="form-group col-sm-6">
-                    <label>Price</label>
-                    {{Form::text('price', $product->price,['class' => 'form-control', 'autocomplete' => 'off' ])}}
-                </div-->
+                <div class="form-group col-sm-6">
+                    <label>Image 1</label>   
+                    {{Form::file('image1')}}
+                </div>
+                <div class="form-group col-sm-6"">
+                    @if(!empty($product->image1))
+                     <img src="{{ asset(productImage($product->image1,$product->id)) }}">
+                    @endif
+                </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <label>Image</label>   
-                    {{Form::file('image')}}
+                    <label>Image 2</label>   
+                    {{Form::file('image2')}}
                 </div>
                 <div class="form-group col-sm-6"">
-                    @if(!empty($product->image))
-                     <img src="{{ asset(userImage($product->image)) }}">
+                    @if(!empty($product->image2))
+                     <img src="{{ asset(productImage($product->image2,$product->id)) }}">
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Image 3</label>   
+                    {{Form::file('image3')}}
+                </div>
+                <div class="form-group col-sm-6"">
+                    @if(!empty($product->image3))
+                     <img src="{{ asset(productImage($product->image3,$product->id)) }}">
                     @endif
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-sm-6"">
-                    <label>Active</label>
-                    <label>{{Form::radio('is_active', 1,$product->deleted_at)}} Yes</label>
-                    <label>{{Form::radio('is_active', 0,!$product->deleted_at)}} No</label>
+                    <label>Active</label>                    
+                    <label>{{Form::radio('is_active', 1,$product->deleted_at == NULL)}} Yes</label>
+                    <label>{{Form::radio('is_active', 0,$product->deleted_at != NULL)}} No</label>
                 </div>
             </div>
 
@@ -91,6 +116,9 @@
     </div>
     
     {{Form::close()}}
+    <div style="display: none;" id="dummy_feature">
+        @include($theme.'partials.product.feature',['value' => ''])
+    </div>
 @endsection
 
 @section('footer_scripts')
@@ -98,6 +126,11 @@
     <script type="text/javascript">
         var save_url = '{{route("saveProduct")}}';
         var list_url = '{{route("listProducts")}}';
+        @if(count($product->feature) > 0)
+            var add_new_feature = false;
+        @else
+            var add_new_feature = true;
+        @endif
     </script>
 @endsection
 

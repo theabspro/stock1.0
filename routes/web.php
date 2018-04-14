@@ -17,11 +17,17 @@ Route::get('/logout',function(){
     return redirect('/login');
 })->name('logout');
 
-Route::get('/{page?}', 'PageController@page')->name('page');
+Route::get('/', 'PageController@page')->name('page');
+Route::get('/page/{page?}', 'PageController@page')->name('page');
 Route::get('/category/{category}', 'PageController@category')->name('category');
+Route::get('/brands', 'PageController@brands')->name('brands');
+Route::get('/brands/products/{brand}', 'PageController@brand_products')->name('brand_products');
 Route::get('/product/{product}', 'PageController@product')->name('product');
-Route::post('/search', 'PageController@search')->name('search');
+Route::get('/search', 'PageController@search')->name('search');
 Route::post('/add-to-cart', 'PageController@addToCart')->name('addToCart');
+Route::post('/create-order', 'OrderController@create_order')->name('create_order');
+Route::post('/contact-request', 'PageController@save_contact_form')->name('contact_request');
+Route::post('/email-subscription', 'PageController@save_email_subscription')->name('email_subscription');
 
 
 Route::prefix('admin')->group(function () {
@@ -32,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//*******************//
 	
 	//DASHBOARD
+	Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 	Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 	
 	//ROLES

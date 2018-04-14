@@ -35,7 +35,6 @@
                             <th>Category</th>
                             <th>Name</th>
                             <th>HSN Code</th>
-                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -47,7 +46,6 @@
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->name}}</td>
                             <td>{{$product->hsn_code}}</td>
-                            <td>{{$product->image}}</td>
                             <td>
                                  <a href="{{route('editProduct', ['product' => $product->id])}}">
                                     <i class="fa fa-edit"></i>

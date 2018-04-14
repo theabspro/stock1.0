@@ -19,7 +19,7 @@
 				<!-- header lists -->
 				<ul>
 					<li>
-						<a class="play-icon popup-with-zoom-anim" href="#small-dialog1">
+						<a class="play-icon popup-with-zoom-anim" href="{{route('page',['page' => 'contact'])}}#map-locator" >
 							<span class="fa fa-map-marker" aria-hidden="true"></span> Shop Locator</a>
 					</li>
 					<li>
@@ -29,19 +29,22 @@
 					<li>
 						<span class="fa fa-phone" aria-hidden="true"></span> 001 234 5678
 					</li>
-					<li>
+					<li style="border-right: none;">
+						<span class="fa fa-envelope" aria-hidden="true"></span> contact@ccmart.in
+					</li>
+					<!--li>
 						<a href="#" data-toggle="modal" data-target="#myModal1">
 							<span class="fa fa-unlock-alt" aria-hidden="true"></span> Sign In </a>
 					</li>
 					<li>
 						<a href="#" data-toggle="modal" data-target="#myModal2">
 							<span class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign Up </a>
-					</li>
+					</li-->
 				</ul>
 				<!-- //header lists -->
 				<!-- search -->
 				<div class="agileits_search">
-					{{Form::open(['route' => 'search'])}}
+					{{Form::open(['route' => 'search', 'method' => 'GET'])}}
 						<input name="q" type="search" placeholder="How can we help you today?" required="required" value="{{isset($query) ? $query : ''}}">
 						<button type="submit" class="btn btn-default" aria-label="Left Align">
 							<span class="fa fa-search" aria-hidden="true"> </span>
@@ -50,7 +53,7 @@
 				</div>
 				<!-- //search -->
 				<!-- cart details -->
-				<div class="top_nav_right">
+				<div class="top_nav_right" style="display: none;">
 					<div class="wthreecartaits wthreecartaits2 cart cart box_1">
 						<form action="#" method="post" class="last">
 							<input type="hidden" name="cmd" value="_cart">
@@ -70,23 +73,22 @@
    
     @include($theme.'partials.modals.sign_in')
     @include($theme.'partials.modals.sign_up')
-	
-	 
-	
-			<div class="clearfix"></div>
-
+    @include($theme.'partials.modals.buy')
+	<div class="clearfix"></div>
 </div>
        
 			<div class="main">
 				<nav id="cbp-hrmenu" class="cbp-hrmenu">
 					<ul>
                     	<li>
-							<a href="{{route('page',['page' => 'about'])}}">About Us</a>
+							<a href="" data-href="{{route('page',['page' => 'about'])}}">About Us</a>
 						</li>
 						
 						@foreach($main_categories as $category)
 						<li>
-							<a href="{{route('category', ['category' => $category->id])}}">{{$category->name}}</a>
+							<a href="{{route('category', ['category' => $category->id])}}" data-href="">
+								{{$category->name}}
+							</a>
 							<div class="cbp-hrsub">
 								<div class="cbp-hrsub-inner"> 
 									<div>
@@ -103,7 +105,11 @@
 					                        		</a>
 					                        	</li>
 					                        @endforeach
-                        					<li class="se"><a href="special.html">See all</a></li>
+                        					<li class="se">
+                        						<a href="{{route('category', ['category' => $category->id])}}">
+                        							See all
+                        						</a>
+                        					</li>
                         				</ul>
                         				@endforeach
 									</div>							
@@ -113,13 +119,13 @@
 						@endforeach
 
 						<li>
-							<a href="">Brands</a>
+							<a href="" data-href="{{route('brands')}}">Brands</a>
 						
 						</li>
                         <li>
-							<a href="#">Accessories</a>
+							<a href="" data-href="{{route('category', ['category' => 11])}}">Accessories</a>
 						</li>
-                        <li><a href="{{route('page',['page' => 'contact'])}}">Contact Us</a>
+                        <li><a href="" data-href="{{route('page',['page' => 'contact'])}}">Contact Us</a>
                            
 						
 						</li>
