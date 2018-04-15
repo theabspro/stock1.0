@@ -20,10 +20,10 @@
 							</div>
 
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" placeholder="Name" name="customer_name" required="">
+								<input type="text" placeholder="Name" name="customer_name" required="" maxlength="255">
 							</div>
 							<div class="styled-input">
-								<input type="text" placeholder="Mobile Number" name="mobile" required="">
+								<input type="text" placeholder="Mobile Number" name="mobile" required="" maxlength="10">
 							</div>
 							<div class="styled-input">
 								<input type="email" placeholder="E-mail" name="email">

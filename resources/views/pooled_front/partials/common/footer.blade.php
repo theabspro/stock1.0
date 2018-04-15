@@ -39,7 +39,7 @@
 						<a href="{{route('page',['page' => 'terms'])}}">Terms of use</a>
 					</li>
 					<li>
-						<a href="{{route('page',['page' => 'privacy_policy'])}}">Privacy Policy</a>
+						<a href="{{route('page',['page' => 'privacy'])}}">Privacy Policy</a>
 					</li>
 				</ul>
 			</div>

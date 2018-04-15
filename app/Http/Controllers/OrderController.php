@@ -15,6 +15,8 @@ use DB;
 use Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewOrder;
 
 class OrderController extends Controller
 {
@@ -45,6 +47,9 @@ class OrderController extends Controller
         }
         $order =new Order($request->all());
         $order->save();
+
+        Mail::to('abbas@ccmart.in')->bcc('rameez.asec@gmail.com')->send(new NewOrder($order));
+
         return redirect()->back()->with(['success' => 'Order Placed Successfully']);
     }
 
